@@ -7,6 +7,8 @@ module.exports = app => {
 	router.get('/userlist', $controller.user.getUser);
 	// 示例配置中间件接口
 	router.get('/userlist', $middleware.auth, $controller.user.getUser);
+	// 示例渲染ejs模板
+	router.get('/ejs', $controller.user.sellHelloEjs)
 
 	return router
 };

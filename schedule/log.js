@@ -1,6 +1,6 @@
 module.exports = {
-	interval:'*/3 * * * * *',
+	interval:'*/10 * * * * *',
 	handler(){
-		console.log('每隔3秒执行一次' + new Date());
+		console.log('每隔10秒执行一次' + new Date());
 	}
 }
