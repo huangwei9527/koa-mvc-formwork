@@ -1,7 +1,7 @@
-/schedule
-/config
-/controller
-/core
-/middleware
-/model
-/service
+schedule
+config
+controller
+core
+middleware
+model
+service

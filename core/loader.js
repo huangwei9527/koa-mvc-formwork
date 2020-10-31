@@ -74,10 +74,14 @@ function initService(app){
 function initModel(app){
 	// 链接数据库, 配置数据库链接
 	if(app.$config.mongodb){
+		mongoose.set('useNewUrlParser', true)
+		mongoose.set('useFindAndModify', false);
+		mongoose.set('useUnifiedTopology', true);
 		mongoose.connect(app.$config.mongodb.url, app.$config.mongodb.options);
 		// app上扩展两个属性
 		app.$mongoose = mongoose;
 		app.$db = mongoose.connection
+
 	}
 	// 初始化model文件夹
 	let model = {};
