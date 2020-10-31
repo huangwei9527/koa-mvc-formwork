@@ -1,0 +1,32 @@
+{
+  "name": "koa-mvc",
+  "version": "1.0.0",
+  "description": "基于koa2封装的mvc工程模板",
+  "main": "app.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/nodemon app.js",
+    "start": "node app.js",
+    "prd": "pm2 start app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huangwei9527/koa-mvc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huangwei9527/koa-mvc/issues"
+  },
+  "homepage": "https://github.com/huangwei9527/koa-mvc#readme",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-router": "^9.4.0",
+    "mongoose": "^5.10.11",
+    "node-schedule": "^1.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.8.1"
+  }
+}
