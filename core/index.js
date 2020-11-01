@@ -3,7 +3,7 @@
  */
 const path = require('path')
 const Koa = require('koa');
-const { initConfig, initController, initService, initModel, initRouter, initMiddleware, initSchedule }  = require('./loader');
+const { initConfig, initController, initService, initModel, initRouter, initMiddleware, initExtend, initSchedule }  = require('./loader');
 class Application{
 	constructor(){
 		this.$app = new Koa();
@@ -22,13 +22,17 @@ class Application{
 		this.$model = initModel(this)
 		// 初始化router
 		this.$router = initRouter(this);
-		this.$app.use(this.$router.routes());
-		// 将ctx注入到app上
-		this.$app.use(ctx => {
-			this.ctx = ctx;
-		})
+		// 初始化扩展
+		initExtend(this);
 		// 初始化定时任务schedule
 		initSchedule(this)
+
+		// 将ctx注入到app上
+		this.$app.use(async (ctx, next) => {
+			this.ctx = ctx;
+			await next()
+		})
+		this.$app.use(this.$router.routes());
 	}
 
 	// 设置内置中间件
@@ -40,8 +44,8 @@ class Application{
 
 		// 配置静态web
 		this.$app.use(koaStatic(path.resolve(__dirname, '../public')), { gzip: true, setHeaders: function(res){
-			res.header( 'Access-Control-Allow-Origin', '*')
-		}});
+				res.header( 'Access-Control-Allow-Origin', '*')
+			}});
 		//跨域处理
 		this.$app.use(cors());
 		// body接口数据处理

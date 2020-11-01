@@ -108,6 +108,13 @@ function initMiddleware(app){
 	return middleware;
 }
 
+// 初始化扩展
+function initExtend(app) {
+	scanFilesByFolder('../extend',(filename, extendFn)=>{
+		app[filename] = Object.assign(app[filename] || {}, extendFn(app))
+	})
+}
+
 //加载定时任务
 function initSchedule(){
 	scanFilesByFolder('../schedule',(filename, scheduleConf)=>{
@@ -122,5 +129,6 @@ module.exports = {
 	initRouter,
 	initModel,
 	initMiddleware,
+	initExtend,
 	initSchedule
 }
