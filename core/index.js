@@ -23,6 +23,10 @@ class Application{
 		// 初始化router
 		this.$router = initRouter(this);
 		this.$app.use(this.$router.routes());
+		// 将ctx注入到app上
+		this.$app.use(ctx => {
+			this.ctx = ctx;
+		})
 		// 初始化定时任务schedule
 		initSchedule(this)
 	}
